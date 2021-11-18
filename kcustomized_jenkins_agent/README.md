@@ -23,7 +23,7 @@ Building your own Docker Image and uploading it to Docker Hub to keep your repos
 **6.**  The Pipeline defining above have four stages:
   
     The first one is to get the Dockerfile from our Github repository.
-    The second one will build the image using $BUILD_NUMBER to tag the version.
+    The second one will build the image according to the tag mentioned.
     The third one is pushing the built image to your Docker Hub registry.
     Finally, we will cleanup the previously built image on the local server.
 
