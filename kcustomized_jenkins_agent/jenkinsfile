@@ -1,0 +1,42 @@
+pipeline {
+
+  environment {
+    registry = "registry.hub.docker.com/bvineeth/jenkins_repository"
+    registryCredential = 'dockerhub_id'
+    dockerImage = ""
+  }
+
+  agent any
+
+  stages {
+
+    stage('Cloning Source') {
+      steps {
+        git 'https://github.com/Vineeth-varma/jenkins.git'
+      }
+    }
+
+    stage('Build image') {
+      steps{
+        script {
+          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+            dockerImage = docker.build("$registry:4.6-1","--file=./agent_with_docker/Dockerfile .")
+          }
+        }
+      }
+    }
+      
+   stage('Push image') {
+      steps{
+        script {
+          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+
+  }
+
+  }
+
+}
