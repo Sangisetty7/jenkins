@@ -20,7 +20,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage = docker.build("$registry:4.6-1","--file=./agent_with_docker/Dockerfile .")
+            dockerImage = docker.build("$registry:4.6-1","--file=./kcustomized_jenkins_agent/Dockerfile .")
           }
         }
       }
