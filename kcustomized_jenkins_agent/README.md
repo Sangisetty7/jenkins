@@ -32,13 +32,13 @@ Building your own Docker Image and uploading it to Docker Hub to keep your repos
    
       ```   sudo docker build -t docker_jenkins_agent:v1   ```
    * Now add the docker.sock, Docker.sock is a Unix socket that enables the Docker server-side daemon, dockerd, to communicate with its command-line interface via a REST API. A container that runs docker.sock can start or stop other containers, create images on the host or write to the host file system.
+   * Add this as a volume in values.yaml for agent.
       ```  
       - type: HostPath
         hostPath: /var/run/docker.sock
         mountPath: /var/run/docker.sock   
-        
         ```
-   * Give 666 permision to /var/run/docker.sock to inside all worker nodes.     
+   * Give 666 permision to this path /var/run/docker.sock inside all worker nodes.     
      
 
  ### Some ideas to go further with Jenkins:
