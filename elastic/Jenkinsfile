@@ -12,7 +12,7 @@ pipeline {
 
     stage('Cloning Source') {
       steps {
-        git 'https://github.com/Vineeth-varma/Elastic_Cloud_on_Kubernetes.git'
+        git 'https://github.com/Vineeth-varma/jenkins.git'
       }
     }
 
@@ -20,7 +20,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage = docker.build("$registry:4.6-1","--file=./elastic-kibana-deployment-automation/Dockerfile .")
+            dockerImage = docker.build("$registry:4.6-1","--file=./elastic/Dockerfile .")
           }
         }
       }
