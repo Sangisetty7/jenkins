@@ -35,10 +35,5 @@ pipeline {
         }
       }
    }
-    stage('Cleaning UP') {
-      steps {
-        sh "docker rmi $registry:4.6.1"
-      }
-    } 
  }
 }
