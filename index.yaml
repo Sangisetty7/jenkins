@@ -1,3 +1,18 @@
 apiVersion: v1
-entries: {}
-generated: "2021-11-20T13:32:04.353803625+01:00"
+entries:
+  elasticsearch_base_version:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-11-20T14:02:23.365717407+01:00"
+    dependencies:
+    - name: prometheus-elasticsearch-exporter
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 4.6.1
+    description: A Helm chart for Kubernetes
+    digest: 43c3ee67f789133defa92ab1e4b24561b6f5b8891878fdfd19ec3819bed3935c
+    name: elasticsearch_base_version
+    type: application
+    urls:
+    - elasticsearch_base_version-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-11-20T14:02:23.364068924+01:00"
