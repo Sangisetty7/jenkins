@@ -18,9 +18,9 @@ def helmInstall (namespace, release) {
     script {
 
         sh """
-            helm repo add test ${HELM_REPO}
+            helm repo add elastic ${HELM_REPO}
             helm repo update
-            helm upgrade --install --namespace ${namespace} ${release} test/${chart_name}
+            helm upgrade --install --namespace ${namespace} ${release} elastic/${chart_name}
         """
     }
 }
