@@ -1,0 +1,39 @@
+ ___    _                 _                                              _     
+(  _`\ (_ )              ( )_  _                                        ( )    
+| (_(_) | |    _ _   ___ | ,_)(_)   ___   ___    __     _ _  _ __   ___ | |__  
+|  _)_  | |  /'_` )/',__)| |  | | /'___)/',__) /'__`\ /'_` )( '__)/'___)|  _ `\
+| (_( ) | | ( (_| |\__, \| |_ | |( (___ \__, \(  ___/( (_| || |  ( (___ | | | |
+(____/'(___)`\__,_)(____/`\__)(_)`\____)(____/`\____)`\__,_)(_)  `\____)(_) (_)
+
+
+Features offered by NSC for "Base version Deployment"
+
++----------------------------------------+---------+
+| Features                               | Present |
++----------------------------------------+---------+
+| Elastic Official image                 |   yes   |
+| Image available at NSC repo            |   yes   |
+| Service should run with non-root user  |   yes   |
+| Service need to be based on helm chart |   yes   |
+| Self healing - Pod Restart             |   yes   |
+| Self healing - Service Restart         |   yes   |
+| Persistent - logs                      |   yes   |
+| Persistent - data                      |   yes   |
+| Basic Authentication                   |   yes   |
+| Sanity Testing                         |   yes   |
++----------------------------------------+---------+
+
+
+Thank you for installing {{ .Chart.Name }}.
+
+Your release is named {{ .Release.Name }}.
+
+To learn more about the release, try:
+
+  $ helm status {{ .Release.Name }}
+  $ helm get all {{ .Release.Name }}
+
+# You can get elastic user password from this command.
+kubectl get secret {{ .Release.Name }}-es-elastic-user -n {{ .Release.Namespace }} -o jsonpath="{.data.elastic}" | base64 -d
+
+

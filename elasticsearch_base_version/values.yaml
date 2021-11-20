@@ -1,0 +1,96 @@
+# Master node Configuration
+master:
+  count: 3
+  resources:
+    requests:
+      cpu: 200m
+      memory: 2Gi
+    limits:
+      cpu: 200m
+      memory: 2Gi
+  volumeClaimTemplates:
+    resources:
+      requests:
+        storage: 1Gi
+    # Create storage class externally and specify name here.
+    storageClassName: sc-elastic
+
+
+# Data Node Configuration
+data:
+  count: 2
+  resources:
+    requests:
+      cpu: 1
+      memory: 4Gi
+    limits:
+      cpu: 1
+      memory: 4Gi
+  volumeClaimTemplates:
+    resources:
+      requests:
+        storage: 50Gi
+    # Create storage class externally and specify name here.
+    storageClassName: sc-elastic
+
+# Elasticsearch service, bydefault it is ClusterIP
+service:
+  metadata:
+    annotations:
+      metallb.universe.tf/allow-shared-ip: smart
+  spec:
+    port: 30010
+    # add only if necessary
+    type: LoadBalancer
+    loadBalancerIP: {}
+
+
+# Elasticsearch Version
+version: 7.14.0
+
+# Elastic image 
+image: gateway-sesk1.nsc.internal.ericsson.com:30048/eccs_onprem/elasticsearch:v7.14.0 
+
+# Private docker registry secret
+imagePullSecrets: harbor
+
+# Security context
+securityContext:
+  runAsGroup: 64000
+  runAsUser: 7282723
+
+# Configmap to transfer logs to files inside elasticsearch
+log4j:
+  enabled: false
+  name: log4j
+
+# Make it "True" when use in EKS/AKS
+initContainers:
+  cloud:
+    enabled: false
+
+
+# For signing with external Certificates like ericsson-signed-certs
+ericsson_certs:
+  enabled: false
+  name: ericsson-signed-certs
+  data:
+    ca_crt: LSO
+    tls_crt: LSO
+    tls_key: LSO
+
+# Specifying the certs in elasticsearch configuration
+tls:
+  enabled: false
+  secretName: ericsson-signed-certs
+
+#Make it "true" when Multi-cluster setup is used
+node_remote_cluster_client: false
+
+# External pvc for backup and logs storage
+pvc:
+  enabled: false
+  name: backup-repo
+  storageClassName: sc-eo
+  storage: 10Gi
+
