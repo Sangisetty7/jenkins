@@ -1,0 +1,65 @@
+/*
+  Namespace Creation
+*/
+
+def createNamespace (namespace) {
+    echo "Creating namespace ${namespace} if needed"
+
+    sh 'if [ -z "$(kubectl get ns ${namespace} -o name 2>/dev/null)" ]; then kubectl create ns ${namespace}; else echo "${namespace} already exist"; fi'
+}
+
+/* 
+  Helm instalation function
+*/
+
+def helmInstall (namespace, release) {
+    echo "Installing ${release} in ${namespace}"
+
+    script {
+
+        sh """
+            helm repo add test ${HELM_REPO}
+            helm repo update
+            helm upgrade --install --namespace ${namespace} ${release} test/${chart_name}
+        """
+    }
+}
+
+pipeline {
+
+  agent any
+  
+  stages {
+
+    stage('Checking resources') {
+      steps {
+        echo "checking the helm and kubernets cluster detials"
+        sh "helm version"
+        sh "kubectl version"
+      }
+    }
+   
+    stage('Namespace Creation') {
+      steps {
+        script {
+          echo "Creating Namespace ${namespace}"
+          createNamespace (namespace)
+          }
+       }
+
+    }
+ 
+    stage('Deploying Helm Package') {
+        steps {
+            script {
+ 
+                echo "Deploying application ${release} to ${namespace} namespace"
+
+                helmInstall(namespace, "${release}")
+            }
+        }
+    }      
+
+  }
+
+}
