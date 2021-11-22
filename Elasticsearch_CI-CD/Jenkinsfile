@@ -31,9 +31,9 @@ def helmInstall (namespace, release) {
 }
 
 pipeline {
-  stages {
-
-    stage('Testing resources') {
+  agent any {
+    stages {
+      stage('Testing resources') {
       steps {
         echo "checking the helm and kubernets cluster detials"
         sh "helm version"
@@ -61,7 +61,7 @@ pipeline {
             }
         }
     }      
-
+    }
   }
 
 }
