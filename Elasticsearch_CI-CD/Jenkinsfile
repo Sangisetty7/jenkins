@@ -31,7 +31,7 @@ def helmInstall (namespace, release) {
 }
 
 pipeline {
-  agent any {
+  agent any 
     stages {
       stage('Testing resources') {
       steps {
@@ -61,7 +61,7 @@ pipeline {
             }
         }
     }      
-    }
+    
   }
 
 }
