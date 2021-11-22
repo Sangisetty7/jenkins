@@ -20,10 +20,10 @@ def helmInstall (namespace, release) {
         sh """
             helm repo add ${name} ${HELM_REPO}
             helm repo update
-            helm upgrade --install --namespace ${namespace} ${release} ${name}/${chart_name}   /
-            --set Values.master.storageClassName="sc-eo"    /
-            --set Values.data.storageClassName="sc-eo"    /
-            --set Values.version="7.13.0"  / 
+            helm upgrade --install --namespace ${namespace} ${release} ${name}/${chart_name}   
+            --set Values.master.storageClassName="sc-eo"    
+            --set Values.data.storageClassName="sc-eo"    
+            --set Values.version="7.13.0"  
             --set Values.image="docker.elastic.co/elasticsearch/elasticsearch:7.13.0"
             
         """
