@@ -49,25 +49,20 @@ service:
 version: 7.14.0
 
 # Elastic image 
-image: gateway-sesk1.nsc.internal.ericsson.com:30048/eccs_onprem/elasticsearch:v7.14.0 
+image: docker.elastic.co/elasticsearch/elasticsearch:7.15.0 
 
 # Private docker registry secret
 imagePullSecrets: harbor
 
 # Security context
 securityContext:
-  runAsGroup: 64000
-  runAsUser: 7282723
+  runAsGroup: 1000
+  runAsUser: 1000
 
 # Configmap to transfer logs to files inside elasticsearch
 log4j:
   enabled: false
   name: log4j
-
-# Make it "True" when use in EKS/AKS
-initContainers:
-  cloud:
-    enabled: false
 
 
 # For signing with external Certificates like ericsson-signed-certs
@@ -82,7 +77,7 @@ ericsson_certs:
 # Specifying the certs in elasticsearch configuration
 tls:
   enabled: false
-  secretName: ericsson-signed-certs
+  secretName: external-signed-certs
 
 #Make it "true" when Multi-cluster setup is used
 node_remote_cluster_client: false
@@ -91,6 +86,6 @@ node_remote_cluster_client: false
 pvc:
   enabled: false
   name: backup-repo
-  storageClassName: sc-eo
+  storageClassName: sc-elastic
   storage: 10Gi
 
