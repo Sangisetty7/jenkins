@@ -7,3 +7,4 @@
 
 ### Procedure
 * Just add environment varaibles and you can run the pipeline using the above Jenkinsfile.
+* It is CI/CD so whatever you update here will get reflected and pipeline will run.
