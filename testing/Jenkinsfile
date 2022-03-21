@@ -7,7 +7,7 @@ pipeline {
             steps {
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL} and ${env.WORKSPACE}"
                 echo 'Hello Mr. ${username}'
-                echo 'I said, Hello Mr. ${username}'
+                echo "I said, Hello Mr. ${username}"
             }
         }
     }
