@@ -9,7 +9,7 @@ pipeline {
     stage('Deploy App') {
       steps {
         script {
-          kubernetesDeploy(configs: "hello-docker.yml", kubeconfigId: "kubeconfig")
+          kubernetesDeploy(configs: "/testing/hello-docker.yml", kubeconfigId: "kubeconfig")
         }
       }
     }
