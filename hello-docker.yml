@@ -7,8 +7,8 @@ metadata:
   namespace: foo
 spec:
   containers:
-  - image: harik8/hello-docker
-    name: hello-docker
+  - image: nginx
+    name: nginx
     resources: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Never
